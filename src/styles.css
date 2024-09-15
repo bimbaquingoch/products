@@ -1,1 +1,26 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --primary-color: #ffdd00;
+  --primary-dark: #ffd100;
+  --secondary-color: #292a48;
+  /* --foreground-color: #f6f6f6; */
+  --background-color: #f9fafc;
+  --foreground-color: #f4f6f9;
+  --secondary-dark: #1e1e2d;
+  --white: #fff;
+  --red-color: #ff0000;
+  --red-light: #ff4d4d;
+  --green-color: #008000;
+  --green-light: #00cc00;
+  --blue-color: #0000ff;
+  --blue-light: #4d4dff;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+html {
+  background-color: var(--background-color);
+  font-family: "Roboto", sans-serif;
+}
