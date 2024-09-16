@@ -37,32 +37,40 @@ form {
   border: 1px solid #ccc;
 }
 
-.form-control.invalid {
-  border-color: red;
-}
-
-.error {
-  color: red;
-  font-size: 0.875rem;
-}
-
 /* Button container */
 .button-container {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   gap: 10px;
   margin-top: 20px;
 }
 
 .btn {
   padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  font-weight: bold;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
 
+.clean {
+  background-color: #f8f9fa;
+  color: #495057;
+}
+
 .btn:disabled {
   background-color: #cccccc;
+}
+
+.is-invalid {
+  border-color: red;
+}
+
+/* Estilo para el texto de error */
+.invalid-feedback {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
 }

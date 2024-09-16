@@ -4,50 +4,71 @@
       <div class="form-group">
         <label for="id">ID</label>
         <input
+          placeholder="12345"
           formControlName="id"
           required
           id="id"
           type="text"
           maxlength="5"
           class="form-control"
+          [ngClass]="{ 'is-invalid': isFieldInvalid('id') }"
         />
+
+        <div *ngIf="isFieldInvalid('id')" class="invalid-feedback">
+          Id no válido
+        </div>
       </div>
 
       <div class="form-group">
-        <label for="nombre">Nombre</label>
+        <label for="name">Nombre</label>
         <input
-          id="nombre"
+          id="name"
+          placeholder="Juan Jose"
           type="text"
           minlength="5"
           maxlength="100"
           class="form-control"
           formControlName="name"
+          [ngClass]="{ 'is-invalid': isFieldInvalid('name') }"
           required
         />
+        <div *ngIf="isFieldInvalid('name')" class="invalid-feedback">
+          Nombre no válido
+        </div>
       </div>
 
       <div class="form-group">
         <label for="descripcion">Descripción</label>
         <input
           id="descripcion"
+          placeholder="Hola me llamo Juan Jose"
           type="text"
           minlength="10"
           maxlength="200"
           class="form-control"
           formControlName="description"
           required="true"
+          [ngClass]="{ 'is-invalid': isFieldInvalid('description') }"
         />
+        <div *ngIf="isFieldInvalid('description')" class="invalid-feedback">
+          Descripción no válida
+        </div>
       </div>
 
       <div class="form-group">
         <label for="logo">Logo</label>
         <input
           id="logo"
+          placeholder="visa"
           type="text"
           class="form-control"
           formControlName="logo"
           required="true"
+          [ngClass]="{ 'is-invalid': isFieldInvalid('logo') }"
         />
+        <div *ngIf="isFieldInvalid('logo')" class="invalid-feedback">
+          El logo debe ser visa
+        </div>
       </div>
 
       <div class="form-group">
@@ -59,7 +80,11 @@
           class="form-control"
           formControlName="date_release"
           required="true"
+          [ngClass]="{ 'is-invalid': isFieldInvalid('date_release') }"
         />
+        <div *ngIf="isFieldInvalid('date_release')" class="invalid-feedback">
+          Fecha de validación, invalida
+        </div>
       </div>
 
       <div class="form-group">
@@ -72,21 +97,20 @@
           value="fechaRevision"
           formControlName="date_revision"
           required="true"
+          [ngClass]="{ 'is-invalid': isFieldInvalid('date_revision') }"
         />
+        <div *ngIf="isFieldInvalid('date_revision')" class="invalid-feedback">
+          Fecha de revisión, invalida
+        </div>
       </div>
     </div>
 
     <!-- Buttons -->
     <div class="button-container">
-      <!-- <button type="button" (click)="resetForm()" class="btn">Limpiar</button> -->
-      <button
-        type="submit"
-        class="btn"
-        (click)="onSubmit()"
-        [disabled]="productForm.invalid"
-      >
-        Guardar
+      <button type="button" (click)="resetForm()" class="btn clean">
+        Limpiar
       </button>
+      <button type="submit" class="btn" (click)="onSubmit()">Guardar</button>
     </div>
   </form>
 </div>

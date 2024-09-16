@@ -1,5 +1,5 @@
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormControl, FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { switchMap } from 'rxjs';
 
@@ -13,12 +13,40 @@ import { Product } from '../../interfaces/product.interface';
 })
 export class NewPageComponent implements OnInit {
   public productForm = new FormGroup({
-    id: new FormControl('', { nonNullable: true }),
-    name: new FormControl('', { nonNullable: true }),
-    description: new FormControl('', { nonNullable: true }),
-    logo: new FormControl('', { nonNullable: true }),
-    date_release: new FormControl(new Date(), { nonNullable: true }),
-    date_revision: new FormControl('', { nonNullable: true }),
+    id: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.maxLength(5)],
+    }),
+    name: new FormControl('', {
+      nonNullable: true,
+      validators: [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(100),
+        Validators.pattern('^[a-zA-ZñÑ ]+$'),
+      ],
+    }),
+    description: new FormControl('', {
+      nonNullable: true,
+      validators: [
+        Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(200),
+        Validators.pattern('^[a-zA-ZñÑ ]+$'),
+      ],
+    }),
+    logo: new FormControl('visa', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
+    date_release: new FormControl(new Date(), {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
+    date_revision: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
   });
 
   constructor(
@@ -50,17 +78,24 @@ export class NewPageComponent implements OnInit {
       return;
     }
 
-    // if (this.productForm.value.id) {
-    //   this.productService.updateProduct(this.currentProduct).subscribe(() => {
-    //     // this.productForm.reset();
-    //     this.router.navigate(['/product/list']);
-    //   });
-    //   return;
-    // }
+    if (this.productForm.value.id) {
+      this.productService.updateProduct(this.currentProduct).subscribe(() => {
+        this.router.navigate(['/product/list']);
+      });
+      return;
+    }
 
     this.productService.createProduct(this.currentProduct).subscribe(() => {
-      // this.productForm.reset();
       this.router.navigate(['/product/list']);
     });
+  }
+
+  isFieldInvalid(field: string): boolean {
+    const control = this.productForm.get(field);
+    return control ? control.invalid && control.touched : false;
+  }
+
+  resetForm(): void {
+    this.productForm.reset();
   }
 }

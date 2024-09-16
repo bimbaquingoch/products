@@ -29,6 +29,7 @@ export class ProductService {
   }
 
   deleteProduct(id: Product['id']): Observable<any> {
+    alert('Está seguro que desea eliminar este producto?');
     return this.petition.delete(`/bp/products/${id}`);
   }
 }
