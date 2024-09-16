@@ -7,57 +7,60 @@
         (change)="searchById($event)"
       />
     </div>
+    <div class="padding-table">
+      <div class="table">
+        <table>
+          <thead>
+            <tr>
+              <th>Logo</th>
+              <th>Nombre producto</th>
+              <th>Descripción <i></i></th>
+              <th>Fecha de liberación</th>
+              <th>Fecha de restructuración</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
 
-    <div class="table">
-      <table>
-        <thead>
-          <tr>
-            <th>Logo</th>
-            <th>Nombre producto</th>
-            <th>Descripción <i></i></th>
-            <th>Fecha de liberación</th>
-            <th>Fecha de restructuración</th>
-            <th>Acción</th>
-          </tr>
-        </thead>
+          <tbody>
+            <tr *ngFor="let product of displayedProducts">
+              <td>
+                <div class="logo">
+                  {{ product.name.charAt(0) }}
+                </div>
+              </td>
+              <td>{{ product.name }}</td>
+              <td>{{ product.description }}</td>
+              <td>{{ product.date_release }}</td>
+              <td>{{ product.date_revision }}</td>
+              <td class="list-actions">
+                <a
+                  (click)="deleteProduct(product.id)"
+                  class="btn-actions delete"
+                  >Eliminar</a
+                >
+                <a
+                  [routerLink]="['/product/edit/', product.id]"
+                  class="btn-actions edit"
+                  >Editar</a
+                >
+                <a
+                  [routerLink]="['/product/', product.id]"
+                  class="btn-actions show"
+                  >Ver</a
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
-        <tbody>
-          <tr *ngFor="let product of displayedProducts">
-            <td>
-              <div class="logo">
-                {{ product.name.charAt(0) }}
-              </div>
-            </td>
-            <td>{{ product.name }}</td>
-            <td>{{ product.description }}</td>
-            <td>{{ product.date_release }}</td>
-            <td>{{ product.date_revision }}</td>
-            <td class="list-actions">
-              <a (click)="deleteProduct(product.id)" class="btn-actions delete"
-                >Eliminar</a
-              >
-              <a
-                [routerLink]="['/product/edit/', product.id]"
-                class="btn-actions edit"
-                >Editar</a
-              >
-              <a
-                [routerLink]="['/product/', product.id]"
-                class="btn-actions show"
-                >Ver</a
-              >
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="footer">
-        <span>{{ displayedProducts.length }} resultados</span>
-        <select (change)="showPaginationByValue($event)">
-          <option value="5" selected>5</option>
-          <option value="10">10</option>
-          <option value="20">20</option>
-        </select>
+        <div class="footer">
+          <span>{{ displayedProducts.length }} resultados</span>
+          <select (change)="showPaginationByValue($event)">
+            <option value="5" selected>5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+          </select>
+        </div>
       </div>
     </div>
   </div>

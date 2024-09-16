@@ -20,6 +20,14 @@ export class ProductService {
       .pipe(catchError((error) => of(undefined)));
   }
 
+  createProduct(product: Product): Observable<Product> {
+    return this.petition.post<Product>(`/bp/products`, product);
+  }
+
+  updateProduct(product: Product): Observable<Product> {
+    return this.petition.put<Product>(`/bp/products/${product.id}`, product);
+  }
+
   deleteProduct(id: Product['id']): Observable<any> {
     return this.petition.delete(`/bp/products/${id}`);
   }
