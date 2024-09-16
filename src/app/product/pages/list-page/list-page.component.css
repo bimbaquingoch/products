@@ -48,6 +48,16 @@ td {
   padding: 1rem 1.2rem;
 }
 
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--foreground-color);
+  height: 4rem;
+  width: 4rem;
+}
+
 th {
   background-color: var(--foreground-color);
 }
@@ -76,6 +86,7 @@ th {
   color: var(--white);
   font-weight: bold;
   text-align: center;
+  text-decoration: none;
 }
 
 .delete {

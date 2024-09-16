@@ -1,19 +1,23 @@
 import { HttpClient } from '@angular/common/http';
+import { catchError, Observable, of } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 
-// import { environment } from '../../../env/environments';
 import { Product } from '../interfaces/product.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  // private baseUrl = environment.baseUrls;
   constructor(private petition: HttpClient) {}
 
   getProducts(): Observable<Product[]> {
     return this.petition.get<Product[]>(`/bp/products`);
+  }
+
+  getProductById(id: Product['id']): Observable<Product | undefined> {
+    return this.petition
+      .get<Product>(`/bp/products/${id}`)
+      .pipe(catchError((error) => of(undefined)));
   }
 
   deleteProduct(id: Product['id']): Observable<any> {

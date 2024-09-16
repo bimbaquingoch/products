@@ -33,6 +33,17 @@ export class ListPageComponent implements OnInit {
     this.displayedProducts = this.products.slice(0, this.itemsPerPage);
   }
 
+  searchById(event: Event): void {
+    const target = event.target as HTMLSelectElement;
+    const value = target.value;
+    this.productService.getProductById(value).subscribe((product) => {
+      if (product) {
+        this.products = [product];
+        this.updateDisplayedProducts();
+      }
+    });
+  }
+
   deleteProduct(id: Product['id']): void {
     this.productService.deleteProduct(id).subscribe(() => {
       this.products = this.products.filter(
