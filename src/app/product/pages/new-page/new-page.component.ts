@@ -78,16 +78,17 @@ export class NewPageComponent implements OnInit {
       return;
     }
 
-    if (this.productForm.value.id) {
+    const isEditing = !!this.productForm.get('id')?.value;
+
+    if (isEditing) {
       this.productService.updateProduct(this.currentProduct).subscribe(() => {
         this.router.navigate(['/product/list']);
       });
-      return;
+    } else {
+      this.productService.createProduct(this.currentProduct).subscribe(() => {
+        this.router.navigate(['/product/list']);
+      });
     }
-
-    this.productService.createProduct(this.currentProduct).subscribe(() => {
-      this.router.navigate(['/product/list']);
-    });
   }
 
   isFieldInvalid(field: string): boolean {
