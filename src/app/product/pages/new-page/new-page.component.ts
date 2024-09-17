@@ -49,6 +49,8 @@ export class NewPageComponent implements OnInit {
     }),
   });
 
+  public productToEdit: Product | undefined;
+
   constructor(
     private productService: ProductService,
     private activatedRoute: ActivatedRoute,
@@ -61,6 +63,8 @@ export class NewPageComponent implements OnInit {
     this.activatedRoute.params
       .pipe(switchMap(({ id }) => this.productService.getProductById(id)))
       .subscribe((product: any) => {
+        this.productToEdit = product;
+
         if (!product) return this.router.navigate(['/product/list']);
 
         this.productForm.reset(product);
@@ -78,9 +82,7 @@ export class NewPageComponent implements OnInit {
       return;
     }
 
-    const isEditing = !!this.productForm.get('id')?.value;
-
-    if (isEditing) {
+    if (this.productToEdit?.id) {
       this.productService.updateProduct(this.currentProduct).subscribe(() => {
         this.router.navigate(['/product/list']);
       });
